@@ -48,7 +48,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> MoviesDB",
-				"Movies derive(titleNew = toString((left(title,length(title)-6)))) ~> MoviesClean",
+				"Movies derive(titleNew = ERROR_FUNCTION('')) ~> MoviesClean",
 				"MoviesClean, MoviesDB join(titleNew == MoviesDB@title,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
