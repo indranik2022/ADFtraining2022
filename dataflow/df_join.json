@@ -27,7 +27,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive() ~> MoviesClean"
+				"source1 derive(titleNew = toString((left(title,length(title)-6)))) ~> MoviesClean"
 			]
 		}
 	}
