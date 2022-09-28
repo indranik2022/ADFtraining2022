@@ -1,0 +1,22 @@
+{
+	"name": "MoviesOpCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_Blob_Training2022",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "output"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
