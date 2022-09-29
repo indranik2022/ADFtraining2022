@@ -89,7 +89,8 @@
 				"     ),",
 				"     partitionFileNames:['MoviesOp_2022'],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> MoviesOp"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> MoviesOp"
 			]
 		}
 	}
