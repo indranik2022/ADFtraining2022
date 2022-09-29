@@ -1,0 +1,47 @@
+{
+	"name": "df_join1",
+	"properties": {
+		"type": "Flowlet",
+		"typeProperties": {
+			"sources": [],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "JoinMovies"
+				},
+				{
+					"name": "Movies"
+				},
+				{
+					"name": "MoviesDB"
+				},
+				{
+					"name": "MovieOp"
+				}
+			],
+			"scriptLines": [
+				"input(output(",
+				"          movieId as string,",
+				"          title as string,",
+				"          genres as string",
+				"     ),",
+				"     order: 0) ~> Movies",
+				"input(output(",
+				"          movie as string,",
+				"          title as string,",
+				"          genres as string,",
+				"          year as string,",
+				"          Rating as string,",
+				"          RottenTomato as string",
+				"     ),",
+				"     order: 1) ~> MoviesDB",
+				"Movies, MoviesDB join(Movies@title == MoviesDB@title,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinMovies",
+				"JoinMovies output() ~> MovieOp"
+			]
+		}
+	}
+}
