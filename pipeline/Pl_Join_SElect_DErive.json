@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Dfjoinpl",
+				"name": "MoviesDf",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "df_join",
+						"referenceName": "Df_join",
 						"type": "DataFlowReference"
 					},
 					"compute": {
