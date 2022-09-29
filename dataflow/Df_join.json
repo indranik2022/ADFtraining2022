@@ -87,6 +87,7 @@
 				"          {8} as string,",
 				"          {56} as string",
 				"     ),",
+				"     partitionFileNames:['MoviesOp_2022'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> MoviesOp"
 			]
