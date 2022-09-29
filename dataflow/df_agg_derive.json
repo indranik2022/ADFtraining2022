@@ -1,0 +1,59 @@
+{
+	"name": "df_agg_derive",
+	"properties": {
+		"description": "dataflow is created to learn aggregation, count activity",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Movies_DS1",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesV1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MoviesOpCsv",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesClean"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ExtractYearTitle"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          movieId as string,",
+				"          title as string,",
+				"          genres as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> MoviesV1",
+				"MoviesV1 derive(year = toInteger(trim(right(title,6),'()')),",
+				"          title = toString(left(title,length(title)-6))) ~> ExtractYearTitle",
+				"ExtractYearTitle sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          {10} as string,",
+				"          {Toy Story} as string,",
+				"          {Adventure|Animation|Children|Comedy|Fantasy} as string,",
+				"          {13} as string,",
+				"          {1996} as string,",
+				"          {8} as string,",
+				"          {56} as string",
+				"     ),",
+				"     partitionFileNames:['MoviesClean.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> MoviesClean"
+			]
+		}
+	}
+}
