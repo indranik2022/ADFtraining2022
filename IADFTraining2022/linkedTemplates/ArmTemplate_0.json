@@ -308,7 +308,7 @@
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
-					"firstRowAsHeader": true,
+					"firstRowAsHeader": false,
 					"quoteChar": "\""
 				},
 				"schema": []
@@ -450,8 +450,8 @@
 						"     validateSchema: false,",
 						"     ignoreNoFilesFound: false) ~> MoviesDB",
 						"Movies derive(titleNew = toString((left(title,length(title)-6)))) ~> MoviesClean",
-						"MoviesClean, MoviesDB join(titleNew == MoviesDB@title,",
-						"     joinType:'left',",
+						"MoviesClean, MoviesDB join(Movies@title == MoviesDB@title,",
+						"     joinType:'inner',",
 						"     matchType:'exact',",
 						"     ignoreSpaces: false,",
 						"     broadcast: 'auto')~> JoinMovies",
