@@ -21,7 +21,15 @@
 			],
 			"sinks": [
 				{
-					"name": "MoviesOp"
+					"dataset": {
+						"referenceName": "MovesOPcsv2",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesOp",
+					"rejectedDataLinkedService": {
+						"referenceName": "LS_Blob_Training2022",
+						"type": "LinkedServiceReference"
+					}
 				}
 			],
 			"transformations": [
@@ -74,6 +82,12 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
 				"     partitionFileNames:['MoviesOP.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
