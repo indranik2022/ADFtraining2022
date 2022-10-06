@@ -27,7 +27,8 @@
 					"dataset": {
 						"referenceName": "ListTables",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
