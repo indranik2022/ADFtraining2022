@@ -1,0 +1,12 @@
+{
+	"name": "CustomerSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SQL_EDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
