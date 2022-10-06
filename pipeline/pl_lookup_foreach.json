@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
+				"name": "GetTables",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -13,7 +13,22 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "\nselect * \nfrom\nedw.INFORMATION_SCHEMA.TABLES\nwhere table_type = 'BASE TABLE';",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "ListTables",
+						"type": "DatasetReference"
+					}
+				}
 			}
 		],
 		"annotations": []
