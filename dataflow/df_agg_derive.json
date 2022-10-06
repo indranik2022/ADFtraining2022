@@ -22,6 +22,10 @@
 					"name": "MoviesClean"
 				},
 				{
+					"dataset": {
+						"referenceName": "MovesOPcsv2",
+						"type": "DatasetReference"
+					},
 					"name": "MoviesCountByYear"
 				}
 			],
@@ -60,7 +64,13 @@
 				"     partitionBy('hash', 1)) ~> MoviesClean",
 				"RatingByYear sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     partitionFileNames:['MovieCountByYear'],",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
+				"     partitionFileNames:['MovieCountByYear.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> MoviesCountByYear"
