@@ -26,6 +26,15 @@
 				},
 				{
 					"name": "Exsit"
+				},
+				{
+					"name": "lookupCustomerId"
+				},
+				{
+					"name": "SetDates"
+				},
+				{
+					"name": "Upsert"
 				}
 			],
 			"scriptLines": [
@@ -67,7 +76,14 @@
 				"CustomerSource derive(HashKey = sha2(256,iifNull(Title,'')+iifNull(FirstName,'')+iifNull(MiddleName,'')+iifNull(LastName,'')+iifNull(Suffix,'')+iifNull(CompanyName,'')+iifNull(SalesPerson,'')+iifNull(EmailAddress,'')+iifNull(Phone,''))) ~> CreateHashkey",
 				"CreateHashkey, DimCustomer exists(CreateHashkey@HashKey == DimCustomer@HashKey,",
 				"     negate:true,",
-				"     broadcast: 'auto')~> Exsit"
+				"     broadcast: 'auto')~> Exsit",
+				"Exsit, DimCustomer lookup(CustomerSource@CustomerID == DimCustomer@CustomerID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookupCustomerId",
+				"lookupCustomerId derive(InsertedDate = iif(isNull(InsertedDate),currentTimestamp(),InsertedDate),",
+				"          ModifiedDate = currentTimestamp()) ~> SetDates",
+				"SetDates alterRow() ~> Upsert"
 			]
 		}
 	}
