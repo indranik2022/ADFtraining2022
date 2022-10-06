@@ -122,6 +122,7 @@
 					},
 					"columnDelimiter": ",",
 					"escapeChar": "\\",
+					"firstRowAsHeader": true,
 					"quoteChar": "\""
 				},
 				"schema": []
@@ -625,7 +626,7 @@
 											"type": "DatasetReference",
 											"parameters": {
 												"FileName": {
-													"value": "@concat(item().table_schema,'_',item().table_name,'csv')",
+													"value": "@concat(item().table_schema,'_',item().table_name,'.csv')",
 													"type": "Expression"
 												}
 											}
