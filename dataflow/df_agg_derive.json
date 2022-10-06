@@ -15,17 +15,9 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "MoviesOpCsv",
-						"type": "DatasetReference"
-					},
 					"name": "MoviesClean"
 				},
 				{
-					"dataset": {
-						"referenceName": "MoviesOpCsv",
-						"type": "DatasetReference"
-					},
 					"name": "MoviesCountByYear"
 				}
 			],
@@ -52,30 +44,12 @@
 				"     MoviesCount = count(year)) ~> RatingByYear",
 				"ExtractYearTitle sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          {10} as string,",
-				"          {Toy Story} as string,",
-				"          {Adventure|Animation|Children|Comedy|Fantasy} as string,",
-				"          {13} as string,",
-				"          {1996} as string,",
-				"          {8} as string,",
-				"          {56} as string",
-				"     ),",
 				"     partitionFileNames:['MoviesClean.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     partitionBy('hash', 1)) ~> MoviesClean",
 				"RatingByYear sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          {10} as string,",
-				"          {Toy Story} as string,",
-				"          {Adventure|Animation|Children|Comedy|Fantasy} as string,",
-				"          {13} as string,",
-				"          {1996} as string,",
-				"          {8} as string,",
-				"          {56} as string",
-				"     ),",
 				"     partitionFileNames:['MovieCountByYear'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",

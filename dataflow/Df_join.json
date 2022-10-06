@@ -21,10 +21,6 @@
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "MoviesOpCsv",
-						"type": "DatasetReference"
-					},
 					"name": "MoviesOp"
 				}
 			],
@@ -78,15 +74,6 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          {10} as string,",
-				"          {Toy Story} as string,",
-				"          {Adventure|Animation|Children|Comedy|Fantasy} as string,",
-				"          {13} as string,",
-				"          {1996} as string,",
-				"          {8} as string,",
-				"          {56} as string",
-				"     ),",
 				"     partitionFileNames:['MoviesOP.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
