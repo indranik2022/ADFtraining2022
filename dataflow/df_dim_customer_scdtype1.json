@@ -20,7 +20,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "CreateHashkey"
+				},
+				{
+					"name": "Exsit"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CustomerID as integer,",
@@ -56,7 +63,11 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> DimCustomer"
+				"     format: 'table') ~> DimCustomer",
+				"CustomerSource derive(HashKey = sha2(256,iifNull(Title,'')+iifNull(FirstName,'')+iifNull(MiddleName,'')+iifNull(LastName,'')+iifNull(Suffix,'')+iifNull(CompanyName,'')+iifNull(SalesPerson,'')+iifNull(EmailAddress,'')+iifNull(Phone,''))) ~> CreateHashkey",
+				"CreateHashkey, DimCustomer exists(CreateHashkey@HashKey == DimCustomer@HashKey,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> Exsit"
 			]
 		}
 	}
