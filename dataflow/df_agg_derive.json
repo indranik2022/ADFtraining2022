@@ -15,6 +15,10 @@
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "MovesOPcsv2",
+						"type": "DatasetReference"
+					},
 					"name": "MoviesClean"
 				},
 				{
@@ -44,6 +48,12 @@
 				"     MoviesCount = count(year)) ~> RatingByYear",
 				"ExtractYearTitle sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          Column_1 as string,",
+				"          Column_2 as string,",
+				"          Column_3 as string,",
+				"          Column_4 as string",
+				"     ),",
 				"     partitionFileNames:['MoviesClean.csv'],",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
