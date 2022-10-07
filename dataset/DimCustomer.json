@@ -68,7 +68,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "CustomerSource"
+			"table": "dim_Customer"
 		}
 	}
 }
