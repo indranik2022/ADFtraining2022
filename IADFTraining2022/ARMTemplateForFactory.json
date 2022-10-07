@@ -230,7 +230,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/df_dim_customer_scdtype1')]"
+				"[concat(variables('factoryId'), '/dataflows/df_dim_customer_scdtype1')]",
+				"[concat(variables('factoryId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -507,7 +508,7 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "CustomerSource"
+					"table": "dim_Customer"
 				}
 			},
 			"dependsOn": [
